@@ -12,7 +12,7 @@ class SendGridHttp(SMTPServer):
             from_email = Email(self.find_header_value('From', data))
             to_email = Email(self.find_header_value('To', data))
             subject = self.find_header_value('Subject', data)
-            content = Content(self.find_header_value('Content-Type', data), re.match('\n\n([\s\S])*', data).group(1))
+            content = Content(self.find_header_value('Content-Type', data), re.match('\r?\n\r?\n([\s\S])*', data).group(1))
             mail = Mail(from_email, subject, to_email, content)
             response = sg.client.mail.send.post(request_body=mail.get())
             print(response.status_code)
