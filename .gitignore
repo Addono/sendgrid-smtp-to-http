@@ -1,4 +1,5 @@
 .idea/
+sendgrid_key
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
