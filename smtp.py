@@ -23,7 +23,7 @@ class SendGridHttp(SMTPServer):
 
     def find_header_value(self, header, data):
         regex = re.match('(\n|^)' + header + ': (\S)*', data)
-        if (header is None):
+        if (regex is None):
             print('Could not find header: ' + header)
 
         return regex.group(1)
