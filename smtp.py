@@ -31,7 +31,9 @@ class SendGridHttp(SMTPServer):
 
 
 def run():
-    foo = SendGridHttp(('localhost', 2525), None)
+    print('Starting SMTP server')
+    SendGridHttp(('localhost', 2525), None)
+    print('SMTP server started')
     try:
         asyncore.loop()
     except KeyboardInterrupt:
