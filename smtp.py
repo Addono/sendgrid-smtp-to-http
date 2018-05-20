@@ -30,8 +30,12 @@ class SendGridHttp(SMTPServer):
         for recipient in rcpttos:
             try:
                 subject = self.find_header_value('Subject', data)
-                body = re.search(r'\n\n([\s\S]*)', data).group(1)
                 content_type = self.find_header_value('Content-Type', data)
+
+                if content_type == 'text/html':
+                    body = re.search(r'(<html [^>]*>(\s\S)</html>)', data).group(1)
+                else:
+                    body = re.search(r'\n\n([\s\S]*)', data).group(1)
 
                 sg = sendgrid.SendGridAPIClient(apikey=self.apikey)
                 data = {
